@@ -11,6 +11,12 @@
 //
 // -- This is a parent command --
 // Cypress.Commands.add('login', (email, password) => { ... })
+Cypress.Commands.add('loginpage', (userN, password) => {
+
+     cy.get('#user-name').type(userN)
+     cy.get('#password').type(password)
+     cy.contains('LOGIN').click()
+ })
 
 //
 //

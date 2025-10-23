@@ -1,5 +1,6 @@
 describe('Test suite', ()=>{
     it('Test case for e-commerce site',()=>{
+        cy.visit
         
         //login Page
         cy.visit('https://www.saucedemo.com/v1/')
@@ -18,10 +19,12 @@ describe('Test suite', ()=>{
             }
         })
         cy.get('#shopping_cart_container').click()
+        
 
         //cartPage
         cy.url().should('equal','https://www.saucedemo.com/v1/cart.html')
         cy.get('.cart_quantity').should('have.length','3')
+        
         cy.contains('CHECKOUT').should('be.visible')
         cy.contains('CHECKOUT').click()
 
@@ -38,7 +41,7 @@ describe('Test suite', ()=>{
         cy.url().should('equal','https://www.saucedemo.com/v1/checkout-step-two.html')
         cy.get('.cart_item .inventory_item_price').each(($price)=>{
             let amount= $price.text()
-               globalThis.sum+=Number(amount.slice(1))// 99.99
+               sum+=Number(amount.slice(1))// $99.99 sum= sum+number
             })
             cy.then(()=>{
                 cy.log('Total: ',sum)
@@ -46,7 +49,7 @@ describe('Test suite', ()=>{
              
         globalThis.rs=0
         cy.get('.summary_subtotal_label').invoke('text').then((text)=>{
-           var tag= text.split('$')
+           var tag= text.split('$') //total price: $99
                rs=tag[1].trim()
               cy.log('Site Total price: ',rs)
               

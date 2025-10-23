@@ -2,13 +2,13 @@ describe('test suite',()=>{
     it('alert & confirm',()=>{
         cy.visit('https://rahulshettyacademy.com/AutomationPractice/')
 
-        //alert
+        //alert, To verify alert message
         cy.get('#alertbtn').click()
         cy.on('window:alert',(alt)=>{
             expect(alt).to.equal('Hello , share this practice page and share your knowledge')
-            return true;
         })
-        //confirm
+        
+        //confirm, To verify confirm message and choose OK/Cancel
         cy.get('#confirmbtn').click()
         cy.on('window:confirm',(cfm)=>{
             expect(cfm).to.equal('Hello , Are you sure you want to confirm?')
@@ -26,8 +26,7 @@ describe('test suite',()=>{
         cy.get('.left-align .table-display td:nth-child(2)').each(($el)=>{
             if($el.text().includes('TestNG')){
                 cy.wrap($el).then((course)=>{
-                    let courseName=course.t
-                    ext()
+                    let courseName=course.text()
                     cy.log(courseName)
                 })
             }

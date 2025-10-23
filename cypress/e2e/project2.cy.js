@@ -11,10 +11,10 @@ describe('Test suite', ()=>{
     it('Test case for e-commerce site',()=>{
         //login Page
         cy.visit('https://www.saucedemo.com/v1/')
-        loginpage.typingUserName(data.user)
-        // cy.get('#user-name').type(data.username)
-        // cy.get('#password').type(data.password)
-        cy.contains('LOGIN').click()
+        loginpage.typingUserName(data.username,data.password)
+  
+       
+        
        // loginpage.typingUserName(data.username)
 
 
@@ -47,11 +47,12 @@ describe('Test suite', ()=>{
         cy.get('.cart_item .inventory_item_price').each(($label)=>{
           let priceLabel= $label.text()//$29.99
           let price =priceLabel.slice(1).trim()//29.99
-        
              sum +=Number(price)
             }).then(()=>{
               cy.log("Our Total price: "+sum)
             })
+
+            
        let Num=0
        cy.get('.summary_subtotal_label').then(($subtotal)=>{
         let subTotal=$subtotal.text()
